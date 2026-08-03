@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build-apk:
@@ -49,11 +49,32 @@ jobs:
       - name: Save APK
         run: |
           mkdir -p release
-          cp android/app/build/outputs/apk/debug/app-debug.apk release/english-club-debug.apk
+          cp android/app/build/outputs/apk/debug/app-debug.apk release/english-club.apk
           ls -lh release/
 
       - uses: actions/upload-artifact@v4
         with:
           name: english-club-apk
-          path: release/english-club-debug.apk
+          path: release/english-club.apk
           if-no-files-found: error
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete apk-latest --yes --cleanup-tag || true
+          gh release create apk-latest \
+            release/english-club.apk \
+            --title "English Club 0.1.0" \
+            --notes "$(cat <<'EOF'
+          **English Club v0.1.0** — APK для установки с файла.
+
+          Как поставить:
+          1. Автоблокировка → выкл. (если мешает).
+          2. Мои файлы → Установка неизвестных приложений → разрешить.
+          3. Скачай **english-club.apk** и открой из Downloads.
+
+          Обновления с той же ссылки ставятся поверх.
+          EOF
+          )" \
+            --latest
