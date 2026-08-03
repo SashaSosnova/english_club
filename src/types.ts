@@ -7,6 +7,7 @@ export type ExerciseType =
   | 'cloze'
   | 'cards'
   | 'dialogue'
+  | 'listening'
   | 'produce'
 
 export type LessonMeta = {
