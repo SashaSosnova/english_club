@@ -6,6 +6,7 @@ const defaultState = (): ProgressState => ({
   version: 1,
   currentLevelId: 'level-1',
   lessons: {},
+  quizzes: {},
   srs: {},
   streakDays: 0,
 })
@@ -16,7 +17,13 @@ export function loadProgress(): ProgressState {
     if (!raw) return defaultState()
     const parsed = JSON.parse(raw) as ProgressState
     if (parsed.version !== 1) return defaultState()
-    return parsed
+    return {
+      ...defaultState(),
+      ...parsed,
+      quizzes: parsed.quizzes ?? {},
+      lessons: parsed.lessons ?? {},
+      srs: parsed.srs ?? {},
+    }
   } catch {
     return defaultState()
   }
@@ -55,6 +62,18 @@ export function touchStreak(state: ProgressState): ProgressState {
   }
 }
 
+function scoredProgress(score: { correct: number; total: number }) {
+  return {
+    completed: true as const,
+    completedAt: new Date().toISOString(),
+    score: score.total
+      ? Math.round((score.correct / score.total) * 100)
+      : 100,
+    answersCorrect: score.correct,
+    answersTotal: score.total,
+  }
+}
+
 export function completeLesson(
   state: ProgressState,
   lessonId: string,
@@ -65,13 +84,22 @@ export function completeLesson(
     ...next,
     lessons: {
       ...next.lessons,
-      [lessonId]: {
-        completed: true,
-        completedAt: new Date().toISOString(),
-        score: score.total ? Math.round((score.correct / score.total) * 100) : 100,
-        answersCorrect: score.correct,
-        answersTotal: score.total,
-      },
+      [lessonId]: scoredProgress(score),
+    },
+  }
+}
+
+export function completeQuiz(
+  state: ProgressState,
+  quizId: string,
+  score: { correct: number; total: number },
+): ProgressState {
+  const next = touchStreak(state)
+  return {
+    ...next,
+    quizzes: {
+      ...(next.quizzes ?? {}),
+      [quizId]: scoredProgress(score),
     },
   }
 }

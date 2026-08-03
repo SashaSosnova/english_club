@@ -1,4 +1,4 @@
-import type { LevelMeta } from '../types'
+import type { LevelMeta, NextAction } from '../types'
 
 function lessons(
   level: number,
@@ -563,11 +563,94 @@ export function allLessonsFlat(levelId: string) {
   return level.units.flatMap((u) => u.lessons)
 }
 
+export function contentLessons(levelId: string) {
+  return allLessonsFlat(levelId).filter((l) => l.hasContent)
+}
+
+export function getUnit(levelId: string, unitId: string) {
+  return getLevel(levelId)?.units.find((u) => u.id === unitId) ?? null
+}
+
+export function isLessonUnlocked(
+  levelId: string,
+  lessonId: string,
+  completedIds: Set<string>,
+) {
+  const list = contentLessons(levelId)
+  const idx = list.findIndex((l) => l.id === lessonId)
+  if (idx < 0) return false
+  if (idx === 0) return true
+  return completedIds.has(list[idx - 1].id)
+}
+
+export function isUnitComplete(unitId: string, completedIds: Set<string>) {
+  for (const level of levels) {
+    const unit = level.units.find((u) => u.id === unitId)
+    if (!unit) continue
+    const withContent = unit.lessons.filter((l) => l.hasContent)
+    if (withContent.length === 0) return false
+    return withContent.every((l) => completedIds.has(l.id))
+  }
+  return false
+}
+
+export function isQuizUnlocked(unitId: string, completedIds: Set<string>) {
+  return isUnitComplete(unitId, completedIds)
+}
+
+export function quizIdForUnit(unitId: string) {
+  return `quiz-${unitId}`
+}
+
 export function nextPlayableLesson(levelId: string, completedIds: Set<string>) {
-  const list = allLessonsFlat(levelId)
-  return (
-    list.find((l) => l.hasContent && !completedIds.has(l.id)) ??
-    list.find((l) => l.hasContent) ??
-    null
+  const list = contentLessons(levelId)
+  const next = list.find(
+    (l) => !completedIds.has(l.id) && isLessonUnlocked(levelId, l.id, completedIds),
   )
+  return next ?? null
+}
+
+export function pendingUnitQuiz(
+  levelId: string,
+  completedIds: Set<string>,
+  completedQuizIds: Set<string>,
+) {
+  const level = getLevel(levelId)
+  if (!level) return null
+  for (const unit of level.units) {
+    const qid = quizIdForUnit(unit.id)
+    if (
+      isUnitComplete(unit.id, completedIds) &&
+      !completedQuizIds.has(qid) &&
+      unit.lessons.some((l) => l.hasContent)
+    ) {
+      return unit
+    }
+  }
+  return null
+}
+
+export function nextAction(
+  levelId: string,
+  completedIds: Set<string>,
+  completedQuizIds: Set<string>,
+): NextAction | null {
+  const quizUnit = pendingUnitQuiz(levelId, completedIds, completedQuizIds)
+  if (quizUnit) {
+    return {
+      type: 'quiz',
+      quizId: quizIdForUnit(quizUnit.id),
+      unitId: quizUnit.id,
+      label: `Unit ${quizUnit.number} Quiz`,
+      detail: quizUnit.titleRu,
+    }
+  }
+  const lesson = nextPlayableLesson(levelId, completedIds)
+  if (!lesson) return null
+  return {
+    type: 'lesson',
+    lessonId: lesson.id,
+    label: `Урок ${lesson.number}. ${lesson.titleRu}`,
+    detail: lesson.grammar,
+  }
 }

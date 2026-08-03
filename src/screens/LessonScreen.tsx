@@ -18,6 +18,8 @@ type Props = {
     score: { correct: number; total: number },
   ) => void
   onCollectCards: (cards: CardItem[]) => void
+  nextLabel?: string
+  onContinueNext?: () => void
 }
 
 export function LessonScreen({
@@ -25,6 +27,8 @@ export function LessonScreen({
   onExit,
   onComplete,
   onCollectCards,
+  nextLabel,
+  onContinueNext,
 }: Props) {
   const meta = getLessonMeta(lessonId)
   const content = getLessonContent(lessonId)
@@ -110,10 +114,24 @@ export function LessonScreen({
           <h2>Урок завершён</h2>
           <p className="lead">
             Результат: {correct}/{total || '—'}
+            {total
+              ? ` (${Math.round((correct / total) * 100)}%)`
+              : ''}
           </p>
-          <button type="button" className="btn primary" onClick={onExit}>
-            К уровню
-          </button>
+          <div className="finish-actions">
+            {nextLabel && onContinueNext && (
+              <button
+                type="button"
+                className="btn primary"
+                onClick={onContinueNext}
+              >
+                {nextLabel}
+              </button>
+            )}
+            <button type="button" className="btn" onClick={onExit}>
+              К уровню
+            </button>
+          </div>
         </div>
       ) : (
         <>

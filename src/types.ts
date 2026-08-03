@@ -145,7 +145,12 @@ export type ProgressState = {
   version: 1
   currentLevelId: string
   lessons: Record<string, LessonProgress>
+  quizzes: Record<string, LessonProgress>
   srs: Record<string, SrsCardState>
   streakDays: number
   lastStudyDate?: string
 }
+
+export type NextAction =
+  | { type: 'lesson'; lessonId: string; label: string; detail: string }
+  | { type: 'quiz'; quizId: string; unitId: string; label: string; detail: string }

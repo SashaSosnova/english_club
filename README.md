@@ -29,8 +29,9 @@ npm run cap:open
 Сборка debug APK в CI идёт при push в `master` (`.github/workflows/android-apk.yml`).
 
 Сейчас в приложении:
-- путь Level 1 (все 24 урока в каталоге)
-- полный интерактивный контент Level 1 (уроки 1–24)
+- путь Level 1 (уроки 1–24) с разблокировкой по порядку
+- Unit Quiz после каждого юнита
+- экран прогресса и слабые места (результат ниже 70%)
 - типы заданий: explain, drill, builder, cloze, cards, dialogue, produce
 - SRS-повтор карточек
 - Capacitor Android

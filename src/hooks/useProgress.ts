@@ -1,7 +1,9 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { CardItem, ProgressState } from '../types'
+import { completedQuizIds } from '../lib/progressInsights'
 import {
   completeLesson,
+  completeQuiz,
   dueSrsCards,
   loadProgress,
   reviewSrsCard,
@@ -30,6 +32,13 @@ export function useProgress() {
     [],
   )
 
+  const markQuizComplete = useCallback(
+    (quizId: string, score: { correct: number; total: number }) => {
+      setProgress((p) => completeQuiz(p, quizId, score))
+    },
+    [],
+  )
+
   const addCards = useCallback((cards: CardItem[]) => {
     setProgress((p) => upsertSrsCards(p, cards))
   }, [])
@@ -40,18 +49,29 @@ export function useProgress() {
 
   const dueCards = dueSrsCards(progress)
 
-  const completedIds = new Set(
-    Object.entries(progress.lessons)
-      .filter(([, v]) => v.completed)
-      .map(([id]) => id),
+  const completedIds = useMemo(
+    () =>
+      new Set(
+        Object.entries(progress.lessons)
+          .filter(([, v]) => v.completed)
+          .map(([id]) => id),
+      ),
+    [progress.lessons],
+  )
+
+  const quizCompletedIds = useMemo(
+    () => completedQuizIds(progress),
+    [progress],
   )
 
   return {
     progress,
     ready,
     completedIds,
+    quizCompletedIds,
     dueCards,
     markLessonComplete,
+    markQuizComplete,
     addCards,
     reviewCard,
   }

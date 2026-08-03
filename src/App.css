@@ -433,3 +433,74 @@
 .unit-block {
   margin-top: 0.5rem;
 }
+
+.home-actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.6rem;
+}
+
+@media (min-width: 560px) {
+  .home-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.card-cta.static {
+  cursor: default;
+}
+
+.lesson-row .num.quiz {
+  background: var(--sea-deep);
+  color: #f5fbf8;
+  font-size: 0.85rem;
+}
+
+.lesson-row .num.warn {
+  background: #fde2e4;
+  color: var(--bad);
+  font-size: 0.75rem;
+}
+
+.progress-unit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.btn.small {
+  padding: 0.45rem 0.7rem;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.btn.block {
+  width: 100%;
+  margin-top: 0.75rem;
+}
+
+.bar.fat {
+  height: 10px;
+  margin: 0.65rem 0 0.35rem;
+}
+
+.stats.tight {
+  margin-top: 0.85rem;
+}
+
+.finish-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.finish-actions .btn {
+  width: 100%;
+}
