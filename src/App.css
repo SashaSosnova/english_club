@@ -504,3 +504,110 @@
 .finish-actions .btn {
   width: 100%;
 }
+
+.btn.speak {
+  background: var(--mist);
+  border-color: transparent;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.9rem;
+}
+
+.btn.speak.icon {
+  padding: 0.35rem 0.55rem;
+  flex: 0 0 auto;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.panel-head h2 {
+  margin: 0;
+}
+
+.subtitle-box {
+  background: linear-gradient(160deg, #1a3a4a, #24584f);
+  color: #f3faf7;
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  min-height: 5.5rem;
+  margin-bottom: 0.85rem;
+  box-shadow: var(--shadow);
+}
+
+.subtitle-box.compact {
+  min-height: auto;
+  padding: 0.7rem 0.9rem;
+}
+
+.sub-speaker {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.sub-text {
+  margin: 0;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 1.35;
+}
+
+.sub-placeholder {
+  margin: 0;
+  opacity: 0.7;
+}
+
+.transcript {
+  margin-bottom: 0.85rem;
+}
+
+.transcript .label {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--sea);
+}
+
+.transcript-line {
+  width: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 12px;
+  padding: 0.55rem 0.7rem;
+  margin-bottom: 0.35rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.transcript-line.active {
+  border-color: var(--sea);
+  background: #eef6f4;
+}
+
+.transcript-line strong {
+  font-size: 0.75rem;
+  color: var(--sea);
+}
+
+.example-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.25rem 0;
+}
+
+.example-row .example {
+  flex: 1;
+  margin: 0;
+}

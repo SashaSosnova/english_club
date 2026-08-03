@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import {
+  continueAction,
   getLessonMeta,
   getLevel,
   nextAction,
@@ -37,11 +38,17 @@ export default function App() {
 
   const lessonNext = useMemo(() => {
     if (screen.name !== 'lesson') return null
-    // Treat current lesson as done so "next" is correct on the finish screen
     const ids = new Set(completedIds)
     ids.add(screen.lessonId)
-    return nextAction(progress.currentLevelId, ids, quizCompletedIds)
-  }, [screen, progress.currentLevelId, completedIds, quizCompletedIds])
+    const meta = getLessonMeta(screen.lessonId)
+    if (meta) {
+      return (
+        nextAction(meta.level.id, ids, quizCompletedIds) ??
+        continueAction(ids, quizCompletedIds)
+      )
+    }
+    return continueAction(ids, quizCompletedIds)
+  }, [screen, completedIds, quizCompletedIds])
 
   if (!ready) {
     return (
@@ -119,9 +126,12 @@ export default function App() {
       {screen.name === 'quiz' && (
         <QuizScreen
           quizId={screen.quizId}
-          onExit={() =>
-            setScreen({ name: 'level', levelId: progress.currentLevelId })
-          }
+          onExit={() => {
+            const unitId = screen.quizId.replace(/^quiz-/, '')
+            const levelId =
+              unitId.startsWith('l2-') ? 'level-2' : 'level-1'
+            setScreen({ name: 'level', levelId })
+          }}
           onComplete={(quizId, score) => markQuizComplete(quizId, score)}
         />
       )}

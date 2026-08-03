@@ -1,5 +1,7 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import type { DialogueExercise } from '../../types'
+import { speakEnglish, stopSpeaking } from '../../lib/tts'
+import { SpeakButton } from '../SpeakButton'
 
 type Props = {
   exercise: DialogueExercise
@@ -35,6 +37,12 @@ export function DialogueView({ exercise, onResult, onDone }: Props) {
   )
 
   const line = exercise.lines[index]
+  const lastNpc = [...log].reverse().find((l) => l.speaker !== 'You')
+
+  useEffect(() => {
+    if (lastNpc) speakEnglish(lastNpc.text)
+    return () => stopSpeaking()
+  }, [log.length, lastNpc?.text])
 
   function finish() {
     setFinished(true)
@@ -59,7 +67,18 @@ export function DialogueView({ exercise, onResult, onDone }: Props) {
 
   return (
     <div className="panel">
-      <h2>{exercise.title}</h2>
+      <div className="panel-head">
+        <h2>{exercise.title}</h2>
+        {lastNpc && <SpeakButton text={lastNpc.text} label="▶︎ Ещё раз" />}
+      </div>
+
+      {lastNpc && (
+        <div className="subtitle-box compact">
+          <span className="sub-speaker">{lastNpc.speaker}</span>
+          <p className="sub-text">{lastNpc.text}</p>
+        </div>
+      )}
+
       <div className="dialogue-log">
         {log.map((l, i) => (
           <div

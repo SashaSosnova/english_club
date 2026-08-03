@@ -5,6 +5,7 @@ import { lessonContents as unit3 } from './l1-u3'
 import { lessonContents as unit4 } from './l1-u4'
 import { lessonContents as unit5 } from './l1-u5'
 import { lessonContents as unit6 } from './l1-u6'
+import { lessonContents as l2unit1 } from './l2-u1'
 
 const all: Record<string, LessonContent> = {
   ...unit1,
@@ -13,6 +14,7 @@ const all: Record<string, LessonContent> = {
   ...unit4,
   ...unit5,
   ...unit6,
+  ...l2unit1,
 }
 
 export function getLessonContent(lessonId: string): LessonContent | null {

@@ -107,6 +107,16 @@ export type ExplainBlock = {
   examples: string[]
 }
 
+/** TTS scene with EN captions (text as subtitles) + short gist drills */
+export type ListeningExercise = {
+  type: 'listening'
+  id: string
+  title: string
+  titleRu?: string
+  lines: { speaker: string; text: string }[]
+  gist: DrillExercise[]
+}
+
 export type Exercise =
   | ExplainBlock
   | DrillExercise
@@ -114,6 +124,7 @@ export type Exercise =
   | ClozeExercise
   | CardsExercise
   | DialogueExercise
+  | ListeningExercise
   | ProduceExercise
 
 export type LessonContent = {

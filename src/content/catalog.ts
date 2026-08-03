@@ -487,37 +487,266 @@ export const levels: LevelMeta[] = [
     cefr: 'A2',
     title: 'Everyday English',
     titleRu: 'Повседневный английский',
-    goal: 'Путешествия, истории, короткие клипы с EN-субтитрами.',
+    goal: 'Путешествия, истории, listening TTS; позже — клипы с EN-субтитрами.',
     units: [
       {
         id: 'l2-u1',
         number: 1,
         title: 'Arrangements & past',
         titleRu: 'Договорённости и прошлое',
-        lessons: lessons(2, 1, [
+        lessons: lessons(
+          2,
+          1,
+          [
+            {
+              title: 'Continuous for future',
+              titleRu: 'Continuous для будущего',
+              grammar: 'Present Continuous for arrangements',
+              vocab: [
+                'fly',
+                'stay',
+                'book',
+                'appointment',
+                'tonight',
+                'invite',
+                'join',
+                'this weekend',
+              ],
+            },
+            {
+              title: 'Past expansion',
+              titleRu: 'Past Simple шире',
+              grammar: 'Past Simple + time markers',
+              vocab: [
+                'flight',
+                'delayed',
+                'missed',
+                'arrived',
+                'spent',
+                'crowded',
+                'expensive',
+                'journey',
+              ],
+            },
+            {
+              title: 'used to',
+              titleRu: 'used to',
+              grammar: 'used to + V',
+              vocab: [
+                'used to',
+                'habit',
+                'abroad',
+                'shy',
+                'afraid',
+                'change',
+              ],
+            },
+            {
+              title: 'will vs going to',
+              titleRu: 'will vs going to',
+              grammar: 'will vs going to',
+              vocab: [
+                'probably',
+                'maybe',
+                'promise',
+                'forecast',
+                'decision',
+                'soon',
+              ],
+            },
+          ],
+          4,
+        ),
+      },
+      {
+        id: 'l2-u2',
+        number: 2,
+        title: 'Comparing & advice',
+        titleRu: 'Сравнение и советы',
+        lessons: lessons(2, 2, [
           {
-            title: 'Continuous for future',
-            titleRu: 'Continuous для будущего',
-            grammar: 'Present Continuous for arrangements',
-            vocab: ['meet', 'fly', 'book', 'tonight'],
+            title: 'Comparatives',
+            titleRu: 'Сравнительная степень',
+            grammar: 'comparatives',
+            vocab: ['cheaper', 'better', 'more comfortable'],
           },
           {
-            title: 'Past expansion',
-            titleRu: 'Past Simple шире',
-            grammar: 'Past Simple + time markers',
-            vocab: ['trip', 'delayed', 'enjoyed', 'expensive'],
+            title: 'Superlatives',
+            titleRu: 'Превосходная степень',
+            grammar: 'superlatives',
+            vocab: ['the best', 'the nearest'],
           },
           {
-            title: 'used to',
-            titleRu: 'used to',
-            grammar: 'used to + V',
-            vocab: ['used to', 'habit', 'before', 'change'],
+            title: 'should / must / have to',
+            titleRu: 'should / must / have to',
+            grammar: 'modals of advice & obligation',
+            vocab: ['should', 'must', 'passport', 'visa'],
           },
           {
-            title: 'will vs going to',
-            titleRu: 'will vs going to',
-            grammar: 'will vs going to',
-            vocab: ['probably', 'promise', 'forecast'],
+            title: 'may / might',
+            titleRu: 'may / might',
+            grammar: 'possibility',
+            vocab: ['might', 'available', 'full'],
+          },
+        ]),
+      },
+      {
+        id: 'l2-u3',
+        number: 3,
+        title: 'Conditionals & Perfect',
+        titleRu: 'Условие и Perfect',
+        lessons: lessons(2, 3, [
+          {
+            title: 'First Conditional',
+            titleRu: 'First Conditional',
+            grammar: 'If + Present, will…',
+            vocab: ['if', 'miss', 'refund'],
+          },
+          {
+            title: 'Present Perfect intro',
+            titleRu: 'Present Perfect — введение',
+            grammar: 'ever / never / just…',
+            vocab: ['ever', 'never', 'already', 'yet'],
+          },
+          {
+            title: 'Perfect vs Past',
+            titleRu: 'Perfect vs Past Simple',
+            grammar: 'experience vs finished time',
+            vocab: ['recently', 'ago', 'last year'],
+          },
+          {
+            title: 'Travel story',
+            titleRu: 'Travel story',
+            grammar: 'mixed tenses review',
+            vocab: ['luggage', 'gate', 'boarding pass'],
+          },
+        ]),
+      },
+      {
+        id: 'l2-u4',
+        number: 4,
+        title: 'Hotel, food & shopping',
+        titleRu: 'Отель, еда и покупки',
+        lessons: lessons(2, 4, [
+          {
+            title: 'something / anything…',
+            titleRu: 'something / anything…',
+            grammar: 'compounds',
+            vocab: ['something', 'anything', 'wrong'],
+          },
+          {
+            title: 'too / enough',
+            titleRu: 'too / enough',
+            grammar: 'too / enough',
+            vocab: ['too hot', 'enough'],
+          },
+          {
+            title: 'Restaurant requests',
+            titleRu: 'Ресторан',
+            grammar: 'polite requests',
+            vocab: ['allergy', 'bill', 'recommend'],
+          },
+          {
+            title: 'Shopping & returns',
+            titleRu: 'Покупки и возврат',
+            grammar: 'functional review',
+            vocab: ['receipt', 'exchange', 'size'],
+          },
+        ]),
+      },
+      {
+        id: 'l2-u5',
+        number: 5,
+        title: 'People, places & purpose',
+        titleRu: 'Люди, места и цель',
+        lessons: lessons(2, 5, [
+          {
+            title: 'Relative pronouns',
+            titleRu: 'who / which / that',
+            grammar: 'relative pronouns',
+            vocab: ['who', 'which', 'that'],
+          },
+          {
+            title: 'Passive Present',
+            titleRu: 'Passive Present',
+            grammar: 'is made / is called',
+            vocab: ['made', 'spoken', 'famous for'],
+          },
+          {
+            title: 'Gerunds',
+            titleRu: 'Gerunds after like/enjoy',
+            grammar: 'like + V-ing',
+            vocab: ['enjoy', 'hate', 'travelling'],
+          },
+          {
+            title: 'Infinitive of purpose',
+            titleRu: 'to + V (цель)',
+            grammar: 'infinitive of purpose',
+            vocab: ['to buy', 'to learn', 'to visit'],
+          },
+        ]),
+      },
+      {
+        id: 'l2-u6',
+        number: 6,
+        title: 'Opinions, health & linking',
+        titleRu: 'Мнения, здоровье, связки',
+        lessons: lessons(2, 6, [
+          {
+            title: 'Articles review',
+            titleRu: 'Артикли — повтор',
+            grammar: 'a/an/the/zero traps',
+            vocab: ['school', 'hospital', 'cinema'],
+          },
+          {
+            title: 'Linking words',
+            titleRu: 'Связующие слова',
+            grammar: 'and/but/because/so/then',
+            vocab: ['because', 'so', 'after that'],
+          },
+          {
+            title: 'Doctor & pharmacy',
+            titleRu: 'Врач и аптека',
+            grammar: 'should + symptoms',
+            vocab: ['headache', 'medicine', 'pharmacy'],
+          },
+          {
+            title: 'Emotions & opinions',
+            titleRu: 'Эмоции и мнения',
+            grammar: 'agree / disagree',
+            vocab: ['I think', 'agree', 'worried'],
+          },
+        ]),
+      },
+      {
+        id: 'l2-u7',
+        number: 7,
+        title: 'Messages & A2 exit',
+        titleRu: 'Сообщения и выход из A2',
+        lessons: lessons(2, 7, [
+          {
+            title: 'Reported speech intro',
+            titleRu: 'Reported speech — введение',
+            grammar: 'say/tell + that',
+            vocab: ['said', 'told', 'message'],
+          },
+          {
+            title: 'Housing problems',
+            titleRu: 'Проблемы с жильём',
+            grammar: 'problem language',
+            vocab: ['rent', 'noisy', 'repair'],
+          },
+          {
+            title: 'Tech help',
+            titleRu: 'Помощь с техникой',
+            grammar: 'instructions',
+            vocab: ['password', 'restart', 'support'],
+          },
+          {
+            title: 'Level Review',
+            titleRu: 'Обзор уровня A2',
+            grammar: 'spiral review',
+            vocab: ['travel', 'opinion', 'story'],
           },
         ]),
       },
@@ -653,4 +882,37 @@ export function nextAction(
     label: `Урок ${lesson.number}. ${lesson.titleRu}`,
     detail: lesson.grammar,
   }
+}
+
+export function isLevelUnlocked(
+  levelId: string,
+  completedIds: Set<string>,
+) {
+  if (levelId === 'level-1') return true
+  if (levelId === 'level-2') {
+    // In dev, A2 is open for testing; in production — after Level 1 lessons.
+    if (import.meta.env.DEV) return true
+    const l1 = contentLessons('level-1')
+    return l1.length > 0 && l1.every((l) => completedIds.has(l.id))
+  }
+  return false
+}
+
+/** Continue across levels: finish A1 path, then A2. */
+export function continueAction(
+  completedIds: Set<string>,
+  completedQuizIds: Set<string>,
+): NextAction | null {
+  const a1 = nextAction('level-1', completedIds, completedQuizIds)
+  if (a1) return a1
+  if (!isLevelUnlocked('level-2', completedIds)) return null
+  return nextAction('level-2', completedIds, completedQuizIds)
+}
+
+export function activeLevelId(completedIds: Set<string>) {
+  const l1Done = contentLessons('level-1').every((l) =>
+    completedIds.has(l.id),
+  )
+  if (l1Done && isLevelUnlocked('level-2', completedIds)) return 'level-2'
+  return 'level-1'
 }

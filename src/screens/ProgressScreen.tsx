@@ -3,7 +3,7 @@ import {
   unitProgressRows,
   weakLessons,
 } from '../lib/progressInsights'
-import { quizIdForUnit } from '../content/catalog'
+import { activeLevelId, getLevel, quizIdForUnit } from '../content/catalog'
 import type { ProgressState } from '../types'
 
 type Props = {
@@ -25,7 +25,8 @@ export function ProgressScreen({
   onOpenQuiz,
   onReview,
 }: Props) {
-  const levelId = progress.currentLevelId
+  const levelId = activeLevelId(completedIds)
+  const level = getLevel(levelId)
   const pct = levelCompletionPct(completedIds, levelId)
   const units = unitProgressRows(progress, levelId, completedIds)
   const weak = weakLessons(progress, levelId)
@@ -45,7 +46,9 @@ export function ProgressScreen({
       </header>
 
       <section className="panel">
-        <p className="eyebrow">Level 1 · A1</p>
+        <p className="eyebrow">
+          Level {level?.number} · {level?.cefr}
+        </p>
         <div className="bar fat">
           <div className="bar-fill" style={{ width: `${pct}%` }} />
         </div>

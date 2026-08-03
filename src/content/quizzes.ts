@@ -86,7 +86,8 @@ export function getUnitQuiz(levelId: string, unitId: string): UnitQuiz | null {
 export function getQuizById(quizId: string): UnitQuiz | null {
   if (!quizId.startsWith('quiz-')) return null
   const unitId = quizId.slice('quiz-'.length)
-  for (const level of [getLevel('level-1'), getLevel('level-2')]) {
+  for (const levelId of ['level-1', 'level-2', 'level-3', 'level-4']) {
+    const level = getLevel(levelId)
     if (!level) continue
     if (level.units.some((u) => u.id === unitId)) {
       return getUnitQuiz(level.id, unitId)

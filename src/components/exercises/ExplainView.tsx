@@ -1,4 +1,5 @@
 import type { ExplainBlock } from '../../types'
+import { SpeakButton } from '../SpeakButton'
 
 export function ExplainView({ exercise }: { exercise: ExplainBlock }) {
   return (
@@ -12,9 +13,10 @@ export function ExplainView({ exercise }: { exercise: ExplainBlock }) {
       <div className="examples">
         <p className="label">Examples</p>
         {exercise.examples.map((ex) => (
-          <p key={ex} className="example">
-            {ex}
-          </p>
+          <div key={ex} className="example-row">
+            <p className="example">{ex}</p>
+            <SpeakButton text={ex} label="▶︎" className="icon" />
+          </div>
         ))}
       </div>
     </div>

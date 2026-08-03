@@ -1,4 +1,10 @@
-import { levels, nextAction } from '../content/catalog'
+import {
+  activeLevelId,
+  continueAction,
+  getLevel,
+  isLevelUnlocked,
+  levels,
+} from '../content/catalog'
 import type { ProgressState } from '../types'
 
 type Props = {
@@ -24,9 +30,9 @@ export function HomeScreen({
   onReview,
   onProgress,
 }: Props) {
-  const current =
-    levels.find((l) => l.id === progress.currentLevelId) ?? levels[0]
-  const action = nextAction(current.id, completedIds, quizCompletedIds)
+  const currentId = activeLevelId(completedIds)
+  const current = getLevel(currentId) ?? levels[0]
+  const action = continueAction(completedIds, quizCompletedIds)
   const doneInLevel = current.units
     .flatMap((u) => u.lessons)
     .filter((l) => l.hasContent && completedIds.has(l.id)).length
@@ -53,7 +59,7 @@ export function HomeScreen({
           <strong>
             {doneInLevel}/{totalInLevel || '—'}
           </strong>
-          <span>уроков уровня</span>
+          <span>уроков · {current.cefr}</span>
         </div>
         <div className="stat">
           <strong>{Object.keys(progress.srs).length}</strong>
@@ -71,18 +77,12 @@ export function HomeScreen({
           }}
         >
           <span className="eyebrow">
-            {action.type === 'quiz' ? 'Тест юнита' : 'Продолжить'} · {current.cefr}
+            {action.type === 'quiz' ? 'Тест юнита' : 'Продолжить'} ·{' '}
+            {current.cefr}
           </span>
           <strong>{action.label}</strong>
           <span className="muted">{action.detail}</span>
         </button>
-      )}
-
-      {!action && totalInLevel > 0 && doneInLevel >= totalInLevel && (
-        <div className="card-cta secondary static">
-          <strong>Level 1 пройден</strong>
-          <span className="muted">Можно повторять уроки и тесты</span>
-        </div>
       )}
 
       <div className="home-actions">
@@ -108,8 +108,12 @@ export function HomeScreen({
       <section className="level-list">
         <h2>Уровни</h2>
         {levels.map((level) => {
-          const locked = level.number > 1 && level.units.length === 0
-          const lessons = level.units.flatMap((u) => u.lessons).filter((l) => l.hasContent)
+          const unlocked = isLevelUnlocked(level.id, completedIds)
+          const empty = level.units.length === 0
+          const locked = !unlocked || empty
+          const lessons = level.units
+            .flatMap((u) => u.lessons)
+            .filter((l) => l.hasContent)
           const done = lessons.filter((l) => completedIds.has(l.id)).length
           return (
             <button
@@ -127,7 +131,11 @@ export function HomeScreen({
                 <p className="muted">{level.goal}</p>
               </div>
               <span className="muted">
-                {locked ? 'скоро' : `${done}/${lessons.length}`}
+                {empty
+                  ? 'скоро'
+                  : !unlocked
+                    ? '🔒 A1'
+                    : `${done}/${lessons.length || '—'}`}
               </span>
             </button>
           )

@@ -7,6 +7,7 @@ import { BuilderView } from '../components/exercises/BuilderView'
 import { ClozeView } from '../components/exercises/ClozeView'
 import { CardsView } from '../components/exercises/CardsView'
 import { DialogueView } from '../components/exercises/DialogueView'
+import { ListeningView } from '../components/exercises/ListeningView'
 import { ProduceView } from '../components/exercises/ProduceView'
 import type { CardItem } from '../types'
 
@@ -167,6 +168,14 @@ export function LessonScreen({
           )}
           {exercise.type === 'dialogue' && (
             <DialogueView
+              key={exercise.id}
+              exercise={exercise}
+              onResult={record}
+              onDone={() => setAwaitNext(true)}
+            />
+          )}
+          {exercise.type === 'listening' && (
+            <ListeningView
               key={exercise.id}
               exercise={exercise}
               onResult={record}

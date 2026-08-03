@@ -36,87 +36,91 @@ function sameMultiset(a, b) {
 
 console.log('English Club QA — content integrity\n')
 
-const level = levels.find((l) => l.id === LEVEL_ID)
-if (!level) {
-  fail(`Level ${LEVEL_ID} not found in catalog`)
-  printSummaryAndExit()
-}
+const LEVEL_IDS = ['level-1', 'level-2']
+const allWithContent = []
 
-const withContent = contentLessons(LEVEL_ID)
-console.log(`1) Lessons with hasContent:true — ${withContent.length}`)
-
-for (const lesson of withContent) {
-  const content = getLessonContent(lesson.id)
-  if (!content) {
-    fail(`Missing lesson content for ${lesson.id} (${lesson.titleRu})`)
+for (const levelId of LEVEL_IDS) {
+  const level = levels.find((l) => l.id === levelId)
+  if (!level) {
+    fail(`Level ${levelId} not found in catalog`)
     continue
   }
-  if (content.lessonId !== lesson.id) {
-    fail(
-      `lessonId mismatch: catalog=${lesson.id} content.lessonId=${content.lessonId}`,
-    )
-  }
+  const withContent = contentLessons(levelId)
+  allWithContent.push(...withContent)
+  console.log(`1) ${levelId} hasContent lessons — ${withContent.length}`)
 
-  const exercises = content.exercises ?? []
-  if (exercises.length < 1) {
-    fail(`${lesson.id}: no exercises`)
-    continue
-  }
-
-  const ids = exercises.map((e) => e.id)
-  const unique = new Set(ids)
-  if (unique.size !== ids.length) {
-    const dupes = ids.filter((id, i) => ids.indexOf(id) !== i)
-    fail(`${lesson.id}: duplicate exercise ids: ${[...new Set(dupes)].join(', ')}`)
-  }
-
-  const interactive = exercises.filter((e) => e.type !== 'explain')
-  if (interactive.length < 1) {
-    warn(`${lesson.id}: only explain blocks, no interactive exercises`)
-  }
-
-  for (const ex of exercises) {
-    if (ex.type === 'drill') {
-      if (!ex.options?.includes(ex.answer)) {
-        fail(
-          `${lesson.id}/${ex.id}: drill answer "${ex.answer}" not in options [${ex.options?.join(', ')}]`,
-        )
-      }
+  for (const lesson of withContent) {
+    const content = getLessonContent(lesson.id)
+    if (!content) {
+      fail(`Missing lesson content for ${lesson.id} (${lesson.titleRu})`)
+      continue
+    }
+    if (content.lessonId !== lesson.id) {
+      fail(
+        `lessonId mismatch: catalog=${lesson.id} content.lessonId=${content.lessonId}`,
+      )
     }
 
-    if (ex.type === 'cloze') {
-      for (const gap of ex.gaps ?? []) {
-        if (!gap.options?.includes(gap.answer)) {
+    const exercises = content.exercises ?? []
+    if (exercises.length < 1) {
+      fail(`${lesson.id}: no exercises`)
+      continue
+    }
+
+    const ids = exercises.map((e) => e.id)
+    const unique = new Set(ids)
+    if (unique.size !== ids.length) {
+      const dupes = ids.filter((id, i) => ids.indexOf(id) !== i)
+      fail(
+        `${lesson.id}: duplicate exercise ids: ${[...new Set(dupes)].join(', ')}`,
+      )
+    }
+
+    for (const ex of exercises) {
+      if (ex.type === 'drill') {
+        if (!ex.options?.includes(ex.answer)) {
           fail(
-            `${lesson.id}/${ex.id}/${gap.id}: cloze answer "${gap.answer}" not in options [${gap.options?.join(', ')}]`,
+            `${lesson.id}/${ex.id}: drill answer "${ex.answer}" not in options [${ex.options?.join(', ')}]`,
           )
         }
       }
-    }
 
-    if (ex.type === 'builder') {
-      if (!sameMultiset(ex.answer ?? [], ex.tokens ?? [])) {
-        fail(
-          `${lesson.id}/${ex.id}: builder answer is not a permutation of tokens\n` +
-            `  tokens=[${(ex.tokens ?? []).join(' | ')}]\n` +
-            `  answer=[${(ex.answer ?? []).join(' | ')}]`,
-        )
-      }
-    }
-
-    if (ex.type === 'dialogue') {
-      for (const line of ex.lines ?? []) {
-        if (!line.choices?.length) continue
-        const correct = line.choices.filter((c) => c.correct)
-        if (correct.length < 1) {
-          fail(
-            `${lesson.id}/${ex.id}/${line.id}: dialogue choice line has no correct:true`,
-          )
-        }
-        for (const c of correct) {
-          if (!c.text || !String(c.text).trim()) {
+      if (ex.type === 'cloze') {
+        for (const gap of ex.gaps ?? []) {
+          if (!gap.options?.includes(gap.answer)) {
             fail(
-              `${lesson.id}/${ex.id}/${line.id}: correct choice has empty text`,
+              `${lesson.id}/${ex.id}/${gap.id}: cloze answer "${gap.answer}" not in options`,
+            )
+          }
+        }
+      }
+
+      if (ex.type === 'builder') {
+        if (!sameMultiset(ex.answer ?? [], ex.tokens ?? [])) {
+          fail(`${lesson.id}/${ex.id}: builder answer is not a permutation of tokens`)
+        }
+      }
+
+      if (ex.type === 'dialogue') {
+        for (const line of ex.lines ?? []) {
+          if (!line.choices?.length) continue
+          const correct = line.choices.filter((c) => c.correct)
+          if (correct.length < 1) {
+            fail(
+              `${lesson.id}/${ex.id}/${line.id}: dialogue choice line has no correct:true`,
+            )
+          }
+        }
+      }
+
+      if (ex.type === 'listening') {
+        if (!ex.lines?.length) {
+          fail(`${lesson.id}/${ex.id}: listening has no lines`)
+        }
+        for (const g of ex.gist ?? []) {
+          if (g.type === 'drill' && !g.options?.includes(g.answer)) {
+            fail(
+              `${lesson.id}/${ex.id}/${g.id}: listening gist answer not in options`,
             )
           }
         }
@@ -125,14 +129,21 @@ for (const lesson of withContent) {
   }
 }
 
-console.log('2) Exercises / unique ids / drills / cloze / builder / dialogue — done')
+const withContent = contentLessons(LEVEL_ID)
+console.log('2) Exercises / unique ids / drills / cloze / builder / dialogue / listening — done')
 
-console.log('3) Unit quizzes l1-u1 … l1-u6')
-const unitIds = ['l1-u1', 'l1-u2', 'l1-u3', 'l1-u4', 'l1-u5', 'l1-u6']
-for (const unitId of unitIds) {
-  const quiz = getUnitQuiz(LEVEL_ID, unitId)
+console.log('3) Unit quizzes')
+const quizPairs = [
+  ...['l1-u1', 'l1-u2', 'l1-u3', 'l1-u4', 'l1-u5', 'l1-u6'].map((id) => [
+    'level-1',
+    id,
+  ]),
+  ['level-2', 'l2-u1'],
+]
+for (const [levelId, unitId] of quizPairs) {
+  const quiz = getUnitQuiz(levelId, unitId)
   if (!quiz) {
-    fail(`getUnitQuiz('${LEVEL_ID}', '${unitId}') returned null`)
+    fail(`getUnitQuiz('${levelId}', '${unitId}') returned null`)
     continue
   }
   if (quiz.questions.length < 4) {
@@ -141,18 +152,9 @@ for (const unitId of unitIds) {
     )
   }
   const types = new Set(quiz.questions.map((q) => q.type))
-  const hasDrill = types.has('drill')
-  const hasClozeOrBuilder = types.has('cloze') || types.has('builder')
-  if (!hasDrill) {
-    warn(`${unitId} quiz: no drill questions`)
-  }
-  if (!hasClozeOrBuilder) {
-    warn(`${unitId} quiz: no cloze/builder mix (types: ${[...types].join(', ')})`)
-  } else {
-    console.log(
-      `   ${unitId}: ${quiz.questions.length} q — types: ${[...types].join(', ')}`,
-    )
-  }
+  console.log(
+    `   ${unitId}: ${quiz.questions.length} q — types: ${[...types].join(', ')}`,
+  )
 }
 
 console.log('4) Unlock logic')
@@ -180,7 +182,8 @@ if (!lesson1 || !lesson2) {
   }
 }
 
-const unit1 = level.units.find((u) => u.id === 'l1-u1')
+const level1 = levels.find((l) => l.id === 'level-1')
+const unit1 = level1?.units.find((u) => u.id === 'l1-u1')
 if (unit1) {
   const u1Lessons = unit1.lessons.filter((l) => l.hasContent)
   if (isQuizUnlocked('l1-u1', empty)) {

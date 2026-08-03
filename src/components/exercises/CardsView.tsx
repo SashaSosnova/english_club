@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import type { CardsExercise } from '../../types'
+import { SpeakButton } from '../SpeakButton'
+import { speakEnglish } from '../../lib/tts'
 
 type Props = {
   exercise: CardsExercise
@@ -21,7 +23,10 @@ export function CardsView({ exercise, onDone, onCollect }: Props) {
       <button
         type="button"
         className={`flashcard ${flipped ? 'flipped' : ''}`}
-        onClick={() => setFlipped((f) => !f)}
+        onClick={() => {
+          setFlipped((f) => !f)
+          if (!flipped) speakEnglish(card.term)
+        }}
       >
         {!flipped ? (
           <span className="term">{card.term}</span>
@@ -32,6 +37,10 @@ export function CardsView({ exercise, onDone, onCollect }: Props) {
           </span>
         )}
       </button>
+      <div className="row">
+        <SpeakButton text={card.term} label="▶︎ Слово" />
+        <SpeakButton text={card.example} label="▶︎ Пример" />
+      </div>
       <div className="row">
         {last ? (
           <button
