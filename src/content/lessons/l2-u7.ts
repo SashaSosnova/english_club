@@ -51,15 +51,22 @@ export const lessonContents: Record<string, LessonContent> = {
         answer: 'asked',
       },
       {
-        type: 'builder',
+        type: 'drill',
         id: 'e6',
+        prompt: 'Direct: "I will call later." → She said she ___ call later.',
+        options: ['would', 'will', 'was'],
+        answer: 'would',
+      },
+      {
+        type: 'builder',
+        id: 'e7',
         prompt: 'Report the message',
         tokens: ['She', 'told', 'me', 'the', 'room', 'was', 'ready', '.'],
         answer: ['She', 'told', 'me', 'the', 'room', 'was', 'ready', '.'],
       },
       {
         type: 'listening',
-        id: 'e7',
+        id: 'e8',
         title: 'Voicemail from the hotel',
         titleRu: 'Голосовое сообщение от отеля',
         lines: [
@@ -103,17 +110,17 @@ export const lessonContents: Record<string, LessonContent> = {
       },
       {
         type: 'cloze',
-        id: 'e8',
+        id: 'e9',
         text: 'The driver ___ the road was closed. He ___ us to take a different route. I ___ him I understood.',
         gaps: [
           { id: 'g1', answer: 'said', options: ['said', 'told', 'asked'] },
           { id: 'g2', answer: 'told', options: ['told', 'said', 'spoke'] },
-          { id: 'g3', answer: 'told', options: ['told', 'said to', 'asked'] },
+          { id: 'g3', answer: 'told', options: ['told', 'said', 'asked'] },
         ],
       },
       {
         type: 'cards',
-        id: 'e9',
+        id: 'e10',
         cards: [
           {
             id: 'a2c149',
@@ -155,15 +162,15 @@ export const lessonContents: Record<string, LessonContent> = {
       },
       {
         type: 'produce',
-        id: 'e10',
-        prompt: 'Report four lines',
+        id: 'e11',
+        prompt: 'Report the voicemail',
         promptRu:
-          'Перескажите 4 реплики из диалога в reported speech (said/told/asked + backshift).',
+          'Перескажите voicemail из listening в reported speech (4+ предложения): said/told + was/would.',
         hints: [
-          'She said (that)…',
-          'He told me (that)…',
-          'They asked if…',
-          'was / would / could',
+          'She said (that) the room was ready.',
+          'She told me to come to reception.',
+          'She said they would…',
+          'was / would',
         ],
         minSentences: 4,
       },
@@ -311,9 +318,9 @@ export const lessonContents: Record<string, LessonContent> = {
           {
             type: 'drill',
             id: 'g2',
-            prompt: 'What problem is still not fully solved?',
-            options: ['The neighbour noise / need a new key', 'Everything is perfect', 'The rent is too high'],
-            answer: 'The neighbour noise / need a new key',
+            prompt: 'What does the tenant still need?',
+            options: ['A new key', 'A new landlord', 'A bigger flat'],
+            answer: 'A new key',
           },
         ],
       },

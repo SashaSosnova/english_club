@@ -12,7 +12,8 @@ export const lessonContents: Record<string, LessonContent> = {
         points: [
           'Comparative = сравнение двух вещей: A is bigger than B',
           'Короткие прилагательные: -er (cheap → cheaper, fast → faster)',
-          'Длинные (2+ слога): more + adj (more expensive, more comfortable)',
+          'Длинные (обычно 3+ слога): more + adj (more expensive, more comfortable)',
+          'Двусложные: часто -er, особенно на -y / -er (happy → happier, quiet → quieter); длинные абстрактные — more (more modern)',
           'Неправильные: good → better, bad → worse, far → further',
           'much / a lot перед comparative: much cheaper, a lot better',
         ],
@@ -218,9 +219,10 @@ export const lessonContents: Record<string, LessonContent> = {
           'Длинные: the most + adj (the most comfortable, the most interesting)',
           'Неправильные: the best, the worst, the furthest',
           'ever / in my life / in the world — усиливают superlative',
+          'Фраза-чанк: the best / worst I have ever… — запомните сейчас; Present Perfect разберём в Unit 3',
         ],
         examples: [
-          'This is the best meal I have ever had.',
+          'This is the best meal I have ever had. (чанк — разберём Perfect позже)',
           'It is the most popular beach in the area.',
           'That was the worst journey of my life.',
         ],
@@ -424,7 +426,8 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'drill',
         id: 'e5',
-        prompt: 'You ___ pay extra for hand luggage on this airline.',
+        prompt:
+          'On this airline hand luggage is free — you ___ pay extra for it.',
         options: ["don't have to", 'must', "mustn't"],
         answer: "don't have to",
       },
@@ -621,7 +624,8 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'drill',
         id: 'e4',
-        prompt: 'The restaurant ___ be closed on Mondays.',
+        prompt:
+          "I'm not sure — the restaurant ___ be closed on Mondays. Let's check online.",
         options: ['might', 'must', 'should'],
         answer: 'might',
       },

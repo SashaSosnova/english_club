@@ -15,11 +15,12 @@ export const lessonContents: Record<string, LessonContent> = {
           'nothing — ничего (= not anything): There is nothing in the fridge.',
           'everything — всё: Everything is fine now.',
           'somebody/anybody/nobody; somewhere/anywhere/nowhere — та же логика',
+          'В вопросах чаще any-: Is there anybody…? Но some- тоже бывает (предложение/ожидание): Would you like something?',
         ],
         examples: [
           'There is something wrong with the Wi-Fi.',
           "I don't have anything for breakfast.",
-          'Is there anybody at reception?',
+          'There isn\'t anybody at reception.',
         ],
       },
       {
@@ -39,7 +40,7 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'drill',
         id: 'e4',
-        prompt: 'Is there ___ at reception?',
+        prompt: "There isn't ___ at reception right now.",
         options: ['anybody', 'somebody', 'nobody'],
         answer: 'anybody',
       },

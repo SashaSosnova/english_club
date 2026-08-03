@@ -13,12 +13,13 @@ export const lessonContents: Record<string, LessonContent> = {
           'who — для людей: This is the woman who helped me.',
           'which — для вещей и животных: The book which I bought is great.',
           'that — для людей и вещей (разговорный): The film that we saw was brilliant.',
+          'where — для мест: The city where I was born is small.',
           'Определяющие придаточные — без запятых; дают важную информацию',
         ],
         examples: [
           'I have a friend who lives in Edinburgh.',
           'The restaurant which is near the station is cheap.',
-          'The gift that she gave me was lovely.',
+          'The city where I stayed was quiet.',
         ],
       },
       {
@@ -322,7 +323,7 @@ export const lessonContents: Record<string, LessonContent> = {
           {
             id: 'a2c109',
             term: 'spoken',
-            translation: 'говоримый (язык)',
+            translation: 'на котором говорят (язык)',
             example: 'Russian is spoken at home.',
           },
           {
@@ -371,9 +372,9 @@ export const lessonContents: Record<string, LessonContent> = {
         id: 'e1',
         title: 'like / enjoy / hate + V-ing',
         points: [
-          'После like, love, enjoy, hate, don\'t mind — герундий (-ing)',
-          'I enjoy reading. She likes cooking. They hate waiting.',
-          'don\'t mind + V-ing — не возражаю: I don\'t mind getting up early.',
+          'После enjoy, hate, don\'t mind — обычно герундий (-ing)',
+          'I enjoy reading. They hate waiting. I don\'t mind getting up early.',
+          'like / love: в BrE часто и -ing, и to + V (I like cooking / I like to cook) — оба ок',
           'НЕ: I enjoy to read ✗ → I enjoy reading ✓',
         ],
         examples: [

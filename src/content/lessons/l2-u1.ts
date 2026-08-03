@@ -477,7 +477,7 @@ export const lessonContents: Record<string, LessonContent> = {
           {
             id: 'a2c21',
             term: 'afraid',
-            translation: 'боязливый / боящийся',
+            translation: 'бояться (be afraid of)',
             example: 'I used to be afraid of planes.',
           },
           {

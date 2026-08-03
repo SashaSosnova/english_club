@@ -32,8 +32,8 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'drill',
         id: 'e3',
-        prompt: 'She had ___ headache and went to ___ doctor.',
-        options: ['a / a', 'the / the', 'a / the'],
+        prompt: 'She had ___ headache, so she went to see ___ doctor.',
+        options: ['a / a', 'the / the', 'an / the'],
         answer: 'a / a',
       },
       {
@@ -629,8 +629,12 @@ export const lessonContents: Record<string, LessonContent> = {
             type: 'drill',
             id: 'g1',
             prompt: 'How does Mia feel about the ending?',
-            options: ['Surprised and moved', 'Angry and bored', 'She did not watch it'],
-            answer: 'Surprised and moved',
+            options: [
+              'Surprised — happy and a little upset',
+              'Angry and bored',
+              'She did not watch it',
+            ],
+            answer: 'Surprised — happy and a little upset',
           },
           {
             type: 'drill',
