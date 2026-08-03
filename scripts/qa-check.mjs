@@ -138,7 +138,9 @@ const quizPairs = [
     'level-1',
     id,
   ]),
-  ['level-2', 'l2-u1'],
+  ...['l2-u1', 'l2-u2', 'l2-u3', 'l2-u4', 'l2-u5', 'l2-u6', 'l2-u7'].map(
+    (id) => ['level-2', id],
+  ),
 ]
 for (const [levelId, unitId] of quizPairs) {
   const quiz = getUnitQuiz(levelId, unitId)
