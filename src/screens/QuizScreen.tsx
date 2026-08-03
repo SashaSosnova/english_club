@@ -1,6 +1,8 @@
 import { useRef, useState } from 'react'
 import { getQuizById } from '../content/quizzes'
 import { DrillView } from '../components/exercises/DrillView'
+import { ClozeView } from '../components/exercises/ClozeView'
+import { BuilderView } from '../components/exercises/BuilderView'
 
 type Props = {
   quizId: string
@@ -84,7 +86,19 @@ export function QuizScreen({ quizId, onExit, onComplete }: Props) {
         </div>
       ) : (
         <>
-          <DrillView key={question.id} exercise={question} onResult={record} />
+          {question.type === 'drill' && (
+            <DrillView key={question.id} exercise={question} onResult={record} />
+          )}
+          {question.type === 'cloze' && (
+            <ClozeView key={question.id} exercise={question} onResult={record} />
+          )}
+          {question.type === 'builder' && (
+            <BuilderView
+              key={question.id}
+              exercise={question}
+              onResult={record}
+            />
+          )}
           {awaitNext && (
             <div className="footer-actions">
               <button type="button" className="btn primary" onClick={goNext}>

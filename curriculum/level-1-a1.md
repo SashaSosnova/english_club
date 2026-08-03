@@ -38,11 +38,12 @@
 - **Input:** text 50 слов — «My family»
 
 ### Lesson 4 — Numbers, time & Unit Challenge
-- **Grammar:** What's the time?; at + time; on + day (light)
-- **Vocab (14):** one–twenty, thirty, forty, fifty, hundred; o'clock, half past, morning, afternoon, evening, today, tomorrow, weekend
-- **Practice:** listen & choose time → say the time → dialogue «When do we meet?»
+- **Grammar:** What's the time?; at + time; on + day (light); How much is it?
+- **Vocab (14):** one–twenty; o'clock, half past, morning, tomorrow, today, weekend (BrE: at the weekend), How much is it?
+- **Practice:** numbers drills → time → price question → dialogue «Are you free on Saturday?»
 - **Unit Challenge:** quiz Units 1 + speaking: представить себя и назвать время встречи
 - **Input:** audio — время и договорённость
+- **Note:** вопрос с do (*When do we meet?*) не вводится до Unit 3 — только чанки на to be / on/at
 
 ---
 

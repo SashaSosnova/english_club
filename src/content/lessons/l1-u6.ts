@@ -148,7 +148,7 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'cloze',
         id: 'e7',
-        text: 'On Saturday I ___ my friend. We ___ and ___ TV.',
+        text: 'On Saturday I ___ my friend. We ___ about the trip and ___ a film.',
         gaps: [
           { id: 'g1', answer: 'called', options: ['called', 'call', 'calls'] },
           { id: 'g2', answer: 'talked', options: ['talked', 'talk', 'talks'] },
@@ -164,7 +164,7 @@ export const lessonContents: Record<string, LessonContent> = {
           { id: 'u6c11', term: 'watched', translation: 'смотрел(а)', example: 'I watched a film.' },
           { id: 'u6c12', term: 'played', translation: 'играл(а)', example: 'They played tennis.' },
           { id: 'u6c13', term: 'cooked', translation: 'готовил(а)', example: 'She cooked pasta.' },
-          { id: 'u6c14', term: 'stayed', translation: 'остался / остановился', example: 'I stayed home.' },
+          { id: 'u6c14', term: 'stayed', translation: 'остался / остановился', example: 'I stayed at home.' },
           { id: 'u6c15', term: 'walked', translation: 'ходил(а) пешком', example: 'We walked a lot.' },
           { id: 'u6c16', term: 'called', translation: 'позвонил(а)', example: 'He called me.' },
         ],
@@ -277,17 +277,17 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'explain',
         id: 'e1',
-        title: 'Past questions, plans & Level wrap-up',
+        title: 'Блок A — Past questions (Did…?)',
         points: [
-          'Did you + V? — Did you go? Yes, I did. / No, I didn\'t.',
+          'Did you/he/she + V1? — Did you go? Did she see…?',
+          "Yes, I did. / No, I didn't.",
           "Where did you go? What did you see?",
-          'going to — планы: I am going to visit a museum.',
-          "I'd like / want / need — желания и нужды",
+          'После did глагол без -ed и без 3 лица: Did she go? (не went / goes)',
         ],
         examples: [
           'Did you enjoy the trip?',
-          'I am going to stay home tomorrow.',
-          "I'd like a quiet weekend.",
+          "I didn't stay at home.",
+          'What did you buy?',
         ],
       },
       {
@@ -307,27 +307,76 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'drill',
         id: 'e4',
+        prompt: 'I ___ go out yesterday. (отрицание)',
+        options: ["didn't", "don't", "wasn't"],
+        answer: "didn't",
+      },
+      {
+        type: 'drill',
+        id: 'e5',
+        prompt: 'What ___ you buy?',
+        options: ['did', 'do', 'were'],
+        answer: 'did',
+      },
+      {
+        type: 'builder',
+        id: 'e6',
+        prompt: 'Соберите вопрос',
+        tokens: ['Did', 'you', 'enjoy', 'the', 'trip', '?'],
+        answer: ['Did', 'you', 'enjoy', 'the', 'trip', '?'],
+      },
+      {
+        type: 'explain',
+        id: 'e7',
+        title: 'Блок B — going to (планы)',
+        points: [
+          'am/is/are + going to + V — план / намерение',
+          "I'm going to visit a museum.",
+          "She isn't going to work tomorrow.",
+        ],
+        examples: [
+          'I am going to stay at home tomorrow.',
+          'We are going to buy tickets.',
+        ],
+      },
+      {
+        type: 'drill',
+        id: 'e8',
         prompt: 'I ___ going to travel next week.',
         options: ['am', 'is', 'are'],
         answer: 'am',
       },
       {
+        type: 'builder',
+        id: 'e9',
+        prompt: 'План на завтра',
+        tokens: ['I', 'am', 'going', 'to', 'buy', 'a', 'ticket', 'tomorrow', '.'],
+        answer: ['I', 'am', 'going', 'to', 'buy', 'a', 'ticket', 'tomorrow', '.'],
+      },
+      {
+        type: 'explain',
+        id: 'e10',
+        title: "Блок C — I'd like (желание)",
+        points: [
+          "I'd like = I would like — вежливое «я бы хотел(а)»",
+          "I'd like a quiet weekend. / I'd like some tea.",
+          'Рядом: want / need — I want rest. I need a ticket.',
+        ],
+        examples: [
+          "I'd like a coffee, please.",
+          "I'd like to stay at home.",
+        ],
+      },
+      {
         type: 'drill',
-        id: 'e5',
+        id: 'e11',
         prompt: "___ like a coffee, please.",
         options: ["I'd", 'I am', 'I did'],
         answer: "I'd",
       },
       {
-        type: 'builder',
-        id: 'e6',
-        prompt: 'Plan',
-        tokens: ['I', 'am', 'going', 'to', 'buy', 'a', 'ticket', 'tomorrow', '.'],
-        answer: ['I', 'am', 'going', 'to', 'buy', 'a', 'ticket', 'tomorrow', '.'],
-      },
-      {
         type: 'dialogue',
-        id: 'e7',
+        id: 'e12',
         title: 'Weekend talk',
         lines: [
           { id: 'd1', speaker: 'Sam', text: 'Did you have fun last weekend?' },
@@ -345,7 +394,7 @@ export const lessonContents: Record<string, LessonContent> = {
             speaker: 'You',
             choices: [
               {
-                text: "I'm going to stay home. I'd like a quiet day.",
+                text: "I'm going to stay at home. I'd like a quiet day.",
                 correct: true,
               },
               {
@@ -358,9 +407,9 @@ export const lessonContents: Record<string, LessonContent> = {
       },
       {
         type: 'cloze',
-        id: 'e8',
+        id: 'e13',
         text:
-          'Micro-story: Last Sunday Anna ___ to the centre. She ___ a ticket and ___ a film. She ___ tired but happy.',
+          'Last Sunday Anna ___ to the centre. She ___ a ticket and ___ a film. In the evening she ___ tired but happy.',
         gaps: [
           { id: 'g1', answer: 'went', options: ['went', 'go', 'goes'] },
           { id: 'g2', answer: 'bought', options: ['bought', 'buy', 'buys'] },
@@ -370,7 +419,7 @@ export const lessonContents: Record<string, LessonContent> = {
       },
       {
         type: 'cards',
-        id: 'e9',
+        id: 'e14',
         cards: [
           { id: 'u6c25', term: 'tomorrow', translation: 'завтра', example: 'See you tomorrow.' },
           { id: 'u6c26', term: 'next week', translation: 'на следующей неделе', example: 'Next week I am free.' },
@@ -379,18 +428,18 @@ export const lessonContents: Record<string, LessonContent> = {
           { id: 'u6c29', term: 'enjoy', translation: 'получать удовольствие', example: 'Did you enjoy it?' },
           { id: 'u6c30', term: 'fun', translation: 'веселье / забавно', example: 'It was fun.' },
           { id: 'u6c31', term: 'hungry', translation: 'голодный', example: 'I am hungry.' },
-          { id: 'u6c32', term: 'ready', translation: 'готовый', example: 'Are you ready?' },
+          { id: 'u6c32', term: "I'd like", translation: 'я бы хотел(а)', example: "I'd like some tea." },
         ],
       },
       {
         type: 'produce',
-        id: 'e10',
+        id: 'e15',
         prompt: 'Level 1 Challenge',
         promptRu:
-          'Level Challenge: A) My last weekend (6 предложений). B) My plans for next weekend (4 предложения). Используйте Past и going to.',
+          'Level Challenge: A) My last weekend (6 предложений с Past / Did). B) My plans for next weekend (4 предложения с going to / I\'d like).',
         hints: [
           'Last weekend I…',
-          'Did…?',
+          "I didn't…",
           'I am going to…',
           "I'd like…",
         ],

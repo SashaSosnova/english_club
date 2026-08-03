@@ -1,6 +1,12 @@
-import type { DrillExercise } from '../types'
+import type {
+  BuilderExercise,
+  ClozeExercise,
+  DrillExercise,
+} from '../types'
 import { getLevel, quizIdForUnit } from './catalog'
 import { getLessonContent } from './lessons'
+
+export type QuizQuestion = DrillExercise | ClozeExercise | BuilderExercise
 
 export type UnitQuiz = {
   id: string
@@ -9,51 +15,65 @@ export type UnitQuiz = {
   unitNumber: number
   title: string
   titleRu: string
-  questions: DrillExercise[]
+  questions: QuizQuestion[]
 }
 
-function pickDrills(unitId: string, levelId: string): DrillExercise[] {
+function collect(unitId: string, levelId: string) {
   const unit = getLevel(levelId)?.units.find((u) => u.id === unitId)
-  if (!unit) return []
   const drills: DrillExercise[] = []
+  const cloze: ClozeExercise[] = []
+  const builders: BuilderExercise[] = []
+  if (!unit) return { drills, cloze, builders }
+
   for (const lesson of unit.lessons) {
     const content = getLessonContent(lesson.id)
     if (!content) continue
     for (const ex of content.exercises) {
       if (ex.type === 'drill') drills.push(ex)
+      if (ex.type === 'cloze') cloze.push(ex)
+      if (ex.type === 'builder') builders.push(ex)
     }
   }
-  return drills
+  return { drills, cloze, builders }
 }
 
-/** Stable subset: take up to 8 drills spread across the unit. */
+function takeSpread<T extends { id: string }>(
+  items: T[],
+  count: number,
+  prefix: string,
+): T[] {
+  if (items.length === 0 || count <= 0) return []
+  const step = Math.max(1, Math.floor(items.length / count))
+  const out: T[] = []
+  for (let i = 0; i < items.length && out.length < count; i += step) {
+    out.push({ ...items[i], id: `${prefix}-${out.length + 1}` })
+  }
+  let j = 0
+  while (out.length < Math.min(count, items.length)) {
+    out.push({ ...items[j], id: `${prefix}-${out.length + 1}` })
+    j += 1
+  }
+  return out
+}
+
+/** Up to 6 drills + 1 cloze + 1 builder when available. */
 export function getUnitQuiz(levelId: string, unitId: string): UnitQuiz | null {
   const level = getLevel(levelId)
   const unit = level?.units.find((u) => u.id === unitId)
   if (!level || !unit) return null
 
-  const drills = pickDrills(unitId, levelId)
+  const { drills, cloze, builders } = collect(unitId, levelId)
   if (drills.length < 4) return null
 
-  const step = Math.max(1, Math.floor(drills.length / 8))
-  const questions: DrillExercise[] = []
-  for (let i = 0; i < drills.length && questions.length < 8; i += step) {
-    const d = drills[i]
-    questions.push({
-      ...d,
-      id: `${quizIdForUnit(unitId)}-q${questions.length + 1}`,
-    })
-  }
-  while (questions.length < Math.min(8, drills.length)) {
-    const d = drills[questions.length]
-    questions.push({
-      ...d,
-      id: `${quizIdForUnit(unitId)}-q${questions.length + 1}`,
-    })
-  }
+  const qid = quizIdForUnit(unitId)
+  const questions: QuizQuestion[] = [
+    ...takeSpread(drills, 6, `${qid}-d`),
+    ...takeSpread(cloze, 1, `${qid}-c`),
+    ...takeSpread(builders, 1, `${qid}-b`),
+  ]
 
   return {
-    id: quizIdForUnit(unitId),
+    id: qid,
     unitId,
     levelId,
     unitNumber: unit.number,

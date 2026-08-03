@@ -13,6 +13,7 @@ export const lessonContents: Record<string, LessonContent> = {
           'Обычно + -s: apple → apples, key → keys',
           '-es после s/ss/sh/ch/x: bus → buses, sandwich → sandwiches',
           'Неправильные: man → men, woman → women, child → children, person → people',
+          'people + are (не is): These people are students.',
           'these — эти (близко), those — те (дальше)',
         ],
         examples: [
@@ -48,6 +49,15 @@ export const lessonContents: Record<string, LessonContent> = {
         prompt: '___ are my shoes. (близко)',
         options: ['This', 'These', 'Those'],
         answer: 'These',
+      },
+      {
+        type: 'drill',
+        id: 'e5b',
+        prompt: 'These people ___ teachers.',
+        promptRu: 'people = множественное',
+        options: ['are', 'is', 'am'],
+        answer: 'are',
+        explainRu: 'people всегда с are / were, не is.',
       },
       {
         type: 'builder',
@@ -288,7 +298,7 @@ export const lessonContents: Record<string, LessonContent> = {
           "he/she/it has got → She's got…",
           "Отрицание: haven't got / hasn't got",
           'Вопрос: Have you got…? Has she got…?',
-          'В американском часто говорят have/has без got — пока учим британскую форму.',
+          'В этом курсе отвечаем have got (BrE). В AmE часто просто have — это тоже верно в жизни, но здесь тренируем have got.',
         ],
         examples: [
           "I've got a bike.",
@@ -299,8 +309,8 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'drill',
         id: 'e2',
-        prompt: 'I ___ a laptop.',
-        options: ['have got', 'has got', 'have'],
+        prompt: 'I ___ a laptop. (форма курса)',
+        options: ['have got', 'has got', 'haves got'],
         answer: 'have got',
       },
       {
@@ -440,12 +450,13 @@ export const lessonContents: Record<string, LessonContent> = {
           'Can I have…, please? — можно мне…?',
           "I'd like… — я бы хотел(а)… (полезно запомнить целиком)",
           'The bill, please. — счёт, пожалуйста',
-          'a/an с едой: a salad, an orange juice (если countable / порция)',
-          'some — немного (часто с едой/напитками): some water, some bread',
+          'How much is it? — сколько это стоит?',
+          'a coffee / a tea = порция; water/bread чаще some water, some bread (не a water)',
         ],
         examples: [
           'Can I have a coffee, please?',
-          "I'd like a salad.",
+          "I'd like some water.",
+          'How much is it? — Four euros.',
           'The bill, please.',
         ],
       },
@@ -465,10 +476,25 @@ export const lessonContents: Record<string, LessonContent> = {
       },
       {
         type: 'drill',
+        id: 'e3b',
+        prompt: "I'd like ___ water, please.",
+        options: ['some', 'a', 'an'],
+        answer: 'some',
+        explainRu: 'water неисчисляемое → some water, не a water.',
+      },
+      {
+        type: 'drill',
         id: 'e4',
         prompt: '___ bill, please.',
         options: ['A', 'An', 'The'],
         answer: 'The',
+      },
+      {
+        type: 'drill',
+        id: 'e4b',
+        prompt: '___ much is the salad?',
+        options: ['How', 'What', 'How many'],
+        answer: 'How',
       },
       {
         type: 'builder',

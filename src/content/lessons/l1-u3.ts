@@ -59,7 +59,7 @@ export const lessonContents: Record<string, LessonContent> = {
       {
         type: 'cloze',
         id: 'e7',
-        text: 'We ___ in the city, but we ___ cook at home every day.',
+        text: 'We ___ near the park, but we ___ drive — we walk every day.',
         gaps: [
           { id: 'g1', answer: 'live', options: ['live', 'lives', "don't live"] },
           {
@@ -590,7 +590,7 @@ export const lessonContents: Record<string, LessonContent> = {
             id: 'u3c32',
             term: 'sleep',
             translation: 'спать',
-            example: 'I sleep 7 hours.',
+            example: 'I sleep for 7 hours.',
           },
         ],
       },

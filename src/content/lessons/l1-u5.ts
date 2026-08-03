@@ -100,14 +100,15 @@ export const lessonContents: Record<string, LessonContent> = {
         title: 'Prepositions of time: in / on / at',
         points: [
           'at + время / night / weekend (BrE): at 7, at night, at the weekend',
-          'on + дни и даты: on Monday, on 3 May',
+          'on + дни и даты: on Monday, on 3 May; AmE часто on the weekend',
           'in + части дня / месяцы / годы: in the morning, in July, in 2020',
-          'Исключение-памятка: at night (не in night)',
+          'at night (не in night)',
+          'on holiday (BrE отпуск) — не in the holiday; AmE: on vacation',
         ],
         examples: [
           'See you on Saturday at 5.',
           'I work in the morning.',
-          'The meeting is at noon.',
+          'We are on holiday in July.',
         ],
       },
       {
@@ -160,7 +161,12 @@ export const lessonContents: Record<string, LessonContent> = {
         cards: [
           { id: 'u5c9', term: 'Monday', translation: 'понедельник', example: 'On Monday.' },
           { id: 'u5c10', term: 'birthday', translation: 'день рождения', example: 'My birthday is in May.' },
-          { id: 'u5c11', term: 'holiday', translation: 'отпуск / праздник', example: 'In the holiday.' },
+          {
+            id: 'u5c11',
+            term: 'on holiday',
+            translation: 'в отпуске (BrE); праздник = public holiday',
+            example: "I'm on holiday in July.",
+          },
           { id: 'u5c12', term: 'noon', translation: 'полдень', example: 'At noon.' },
           { id: 'u5c13', term: 'midnight', translation: 'полночь', example: 'At midnight.' },
           { id: 'u5c14', term: 'appointment', translation: 'запись / встреча', example: 'I have an appointment.' },
@@ -248,13 +254,13 @@ export const lessonContents: Record<string, LessonContent> = {
         id: 'e8',
         cards: [
           { id: 'u5c17', term: 'right now', translation: 'прямо сейчас', example: 'I am busy right now.' },
-          { id: 'u5c18', term: 'wearing', translation: 'надетый / носящий', example: 'She is wearing a coat.' },
-          { id: 'u5c19', term: 'waiting', translation: 'ждущий', example: 'We are waiting.' },
-          { id: 'u5c20', term: 'sitting', translation: 'сидящий', example: 'He is sitting.' },
-          { id: 'u5c21', term: 'standing', translation: 'стоящий', example: 'I am standing here.' },
-          { id: 'u5c22', term: 'raining', translation: 'идёт дождь', example: 'It is raining.' },
-          { id: 'u5c23', term: 'happening', translation: 'происходящее', example: 'What is happening?' },
-          { id: 'u5c24', term: 'talking', translation: 'говорящий', example: 'They are talking.' },
+          { id: 'u5c18', term: 'wear', translation: 'носить (одежду)', example: 'She is wearing a coat.' },
+          { id: 'u5c19', term: 'wait', translation: 'ждать', example: 'We are waiting for the bus.' },
+          { id: 'u5c20', term: 'sit', translation: 'сидеть', example: 'He is sitting outside.' },
+          { id: 'u5c21', term: 'stand', translation: 'стоять', example: 'I am standing here.' },
+          { id: 'u5c22', term: 'rain', translation: 'идти (о дожде)', example: 'It is raining.' },
+          { id: 'u5c23', term: 'happen', translation: 'происходить', example: 'What is happening?' },
+          { id: 'u5c24', term: 'talk', translation: 'говорить / разговаривать', example: 'They are talking.' },
         ],
       },
       {
