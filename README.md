@@ -17,11 +17,23 @@ npm install
 npm run dev
 ```
 
+### Android (Capacitor)
+
+```bash
+npm run build
+npx cap add android   # один раз
+npm run cap:sync
+npm run cap:open
+```
+
+Сборка debug APK в CI идёт при push в `master` (`.github/workflows/android-apk.yml`).
+
 Сейчас в приложении:
 - путь Level 1 (все 24 урока в каталоге)
-- полный интерактивный контент Units 1–2 (уроки 1–8)
+- полный интерактивный контент Units 1–3 (уроки 1–12)
 - типы заданий: explain, drill, builder, cloze, cards, dialogue, produce
 - SRS-повтор карточек
+- Capacitor Android
 - заготовки Level 2–4
 
 ## Учебная программа

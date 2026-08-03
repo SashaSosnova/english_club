@@ -5,6 +5,9 @@ export default defineConfig({
   base: './',
   server: {
     host: true,
+    watch: {
+      ignored: ['**/android/**'],
+    },
   },
   build: {
     outDir: 'dist',
