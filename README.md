@@ -30,7 +30,7 @@ npm run cap:open
 
 Сейчас в приложении:
 - путь Level 1 (все 24 урока в каталоге)
-- полный интерактивный контент Units 1–3 (уроки 1–12)
+- полный интерактивный контент Level 1 (уроки 1–24)
 - типы заданий: explain, drill, builder, cloze, cards, dialogue, produce
 - SRS-повтор карточек
 - Capacitor Android

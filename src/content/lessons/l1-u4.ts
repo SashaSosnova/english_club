@@ -1,0 +1,410 @@
+import type { LessonContent } from '../../types'
+
+export const lessonContents: Record<string, LessonContent> = {
+  'l1-u4-l1': {
+    lessonId: 'l1-u4-l1',
+    durationMin: 35,
+    exercises: [
+      {
+        type: 'explain',
+        id: 'e1',
+        title: 'can / can\'t',
+        points: [
+          'can + V — умение или просьба: I can swim. Can you help me?',
+          "can't = cannot — I can't drive.",
+          'Форма одна для всех лиц: she can, they can',
+          'Короткие ответы: Yes, I can. / No, I can\'t.',
+        ],
+        examples: [
+          'I can speak English.',
+          "She can't sing.",
+          'Can I pay by card?',
+        ],
+      },
+      {
+        type: 'drill',
+        id: 'e2',
+        prompt: 'I ___ swim.',
+        options: ['can', 'cans', 'am can'],
+        answer: 'can',
+      },
+      {
+        type: 'drill',
+        id: 'e3',
+        prompt: 'He ___ drive. (не умеет)',
+        options: ["can't", "doesn't can", 'not can'],
+        answer: "can't",
+      },
+      {
+        type: 'drill',
+        id: 'e4',
+        prompt: '___ you open the window?',
+        options: ['Can', 'Do', 'Are'],
+        answer: 'Can',
+      },
+      {
+        type: 'drill',
+        id: 'e5',
+        prompt: 'Can she cook? — Yes, she ___.',
+        options: ['can', 'does', 'is'],
+        answer: 'can',
+      },
+      {
+        type: 'builder',
+        id: 'e6',
+        prompt: 'Travel phrase',
+        tokens: ['Can', 'you', 'help', 'me', '?'],
+        answer: ['Can', 'you', 'help', 'me', '?'],
+      },
+      {
+        type: 'dialogue',
+        id: 'e7',
+        title: 'At the shop',
+        lines: [
+          { id: 'd1', speaker: 'Clerk', text: 'Can I help you?' },
+          {
+            id: 'd2',
+            speaker: 'You',
+            choices: [
+              { text: 'Yes. Can I pay by card?', correct: true },
+              { text: 'Yes. I can pay card?', correct: false },
+            ],
+          },
+          { id: 'd3', speaker: 'Clerk', text: 'Of course. Do you understand the price?' },
+          {
+            id: 'd4',
+            speaker: 'You',
+            choices: [
+              { text: "Sorry, I can't hear you. Can you speak slowly?", correct: true },
+              { text: 'Sorry, I am not hear.', correct: false },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'cards',
+        id: 'e8',
+        cards: [
+          { id: 'u4c1', term: 'swim', translation: 'плавать', example: 'I can swim.' },
+          { id: 'u4c2', term: 'drive', translation: 'водить', example: "I can't drive." },
+          { id: 'u4c3', term: 'help', translation: 'помогать', example: 'Can you help me?' },
+          { id: 'u4c4', term: 'understand', translation: 'понимать', example: 'I can understand.' },
+          { id: 'u4c5', term: 'wait', translation: 'ждать', example: 'Please wait.' },
+          { id: 'u4c6', term: 'open', translation: 'открывать', example: 'Can you open this?' },
+          { id: 'u4c7', term: 'hear', translation: 'слышать', example: "I can't hear you." },
+          { id: 'u4c8', term: 'sing', translation: 'петь', example: 'She can sing.' },
+        ],
+      },
+      {
+        type: 'produce',
+        id: 'e9',
+        prompt: 'Can & requests',
+        promptRu: '4 умения (can/can\'t) и 2 вежливые просьбы с Can you / Can I…?',
+        hints: ['I can…', "I can't…", 'Can you…?', 'Can I…?'],
+        minSentences: 6,
+      },
+    ],
+  },
+
+  'l1-u4-l2': {
+    lessonId: 'l1-u4-l2',
+    durationMin: 35,
+    exercises: [
+      {
+        type: 'explain',
+        id: 'e1',
+        title: 'Imperatives & directions',
+        points: [
+          'Императив = базовая форма глагола: Go! Wait! Turn left!',
+          "Отрицание: Don't + V — Don't cross here.",
+          'Turn left / turn right / go straight on',
+          'near / next to / opposite — рядом / рядом с / напротив',
+        ],
+        examples: [
+          'Go straight on and turn left.',
+          'The café is opposite the station.',
+          "Don't stop in the street.",
+        ],
+      },
+      {
+        type: 'drill',
+        id: 'e2',
+        prompt: '___ left at the corner.',
+        options: ['Turn', 'Turning', 'Turns'],
+        answer: 'Turn',
+      },
+      {
+        type: 'drill',
+        id: 'e3',
+        prompt: 'Go ___ on.',
+        options: ['straight', 'left', 'near'],
+        answer: 'straight',
+      },
+      {
+        type: 'drill',
+        id: 'e4',
+        prompt: '___ wait here. (не ждите)',
+        options: ["Don't", "Doesn't", 'Not'],
+        answer: "Don't",
+      },
+      {
+        type: 'drill',
+        id: 'e5',
+        prompt: 'The hotel is ___ the park.',
+        options: ['opposite', 'opposites', 'to opposite'],
+        answer: 'opposite',
+      },
+      {
+        type: 'builder',
+        id: 'e6',
+        prompt: 'Directions',
+        tokens: ['Go', 'straight', 'on', 'and', 'turn', 'right', '.'],
+        answer: ['Go', 'straight', 'on', 'and', 'turn', 'right', '.'],
+      },
+      {
+        type: 'dialogue',
+        id: 'e7',
+        title: 'Asking the way',
+        lines: [
+          { id: 'd1', speaker: 'You', text: 'Excuse me. Where is the station?' },
+          {
+            id: 'd2',
+            speaker: 'Local',
+            text: 'Go straight on. Then turn left. It is next to the hotel.',
+          },
+          {
+            id: 'd3',
+            speaker: 'You',
+            choices: [
+              { text: 'Thank you! Is it near here?', correct: true },
+              { text: 'Thank you! It are near?', correct: false },
+            ],
+          },
+          {
+            id: 'd4',
+            speaker: 'Local',
+            text: 'Yes. Cross the street at the corner.',
+          },
+        ],
+      },
+      {
+        type: 'cards',
+        id: 'e8',
+        cards: [
+          { id: 'u4c9', term: 'turn left', translation: 'поверните налево', example: 'Turn left here.' },
+          { id: 'u4c10', term: 'turn right', translation: 'поверните направо', example: 'Turn right at the corner.' },
+          { id: 'u4c11', term: 'straight on', translation: 'прямо', example: 'Go straight on.' },
+          { id: 'u4c12', term: 'corner', translation: 'угол', example: 'Turn left at the corner.' },
+          { id: 'u4c13', term: 'cross', translation: 'переходить', example: 'Cross the street.' },
+          { id: 'u4c14', term: 'near', translation: 'рядом', example: 'Is it near?' },
+          { id: 'u4c15', term: 'next to', translation: 'рядом с', example: 'Next to the hotel.' },
+          { id: 'u4c16', term: 'opposite', translation: 'напротив', example: 'Opposite the park.' },
+        ],
+      },
+      {
+        type: 'produce',
+        id: 'e9',
+        prompt: 'From the station to a café',
+        promptRu: 'Дайте дорогу от станции до кафе: 5–6 шагов (Go / Turn / Cross…).',
+        hints: ['Go straight on…', 'Turn left…', 'The café is…'],
+        minSentences: 5,
+      },
+    ],
+  },
+
+  'l1-u4-l3': {
+    lessonId: 'l1-u4-l3',
+    durationMin: 35,
+    exercises: [
+      {
+        type: 'explain',
+        id: 'e1',
+        title: 'Adverbs of frequency',
+        points: [
+          'always → usually → often → sometimes → rarely → never',
+          'Перед основным глаголом: I often walk.',
+          'После am/is/are: She is always late.',
+          'How often…? — How often do you take the metro?',
+        ],
+        examples: [
+          'I always have breakfast.',
+          'We sometimes take a taxi.',
+          'He is never free on Monday.',
+        ],
+      },
+      {
+        type: 'drill',
+        id: 'e2',
+        prompt: 'I ___ cook at home. (часто)',
+        options: ['often', 'never always', 'am often'],
+        answer: 'often',
+      },
+      {
+        type: 'drill',
+        id: 'e3',
+        prompt: 'She is ___ late.',
+        options: ['always', 'always is', 'late always'],
+        answer: 'always',
+      },
+      {
+        type: 'drill',
+        id: 'e4',
+        prompt: 'I ___ eat meat. (никогда)',
+        options: ['never', 'always', 'usually'],
+        answer: 'never',
+      },
+      {
+        type: 'drill',
+        id: 'e5',
+        prompt: '___ often do you go by bus?',
+        options: ['How', 'What', 'When'],
+        answer: 'How',
+      },
+      {
+        type: 'builder',
+        id: 'e6',
+        prompt: 'Frequency sentence',
+        tokens: ['I', 'usually', 'go', 'to', 'work', 'by', 'metro', '.'],
+        answer: ['I', 'usually', 'go', 'to', 'work', 'by', 'metro', '.'],
+      },
+      {
+        type: 'cloze',
+        id: 'e7',
+        text: 'I ___ take a taxi. I ___ walk. (sometimes / often)',
+        gaps: [
+          { id: 'g1', answer: 'sometimes', options: ['sometimes', 'always', 'never'] },
+          { id: 'g2', answer: 'often', options: ['often', 'never', 'rarely'] },
+        ],
+      },
+      {
+        type: 'cards',
+        id: 'e8',
+        cards: [
+          { id: 'u4c17', term: 'always', translation: 'всегда', example: 'I always say thank you.' },
+          { id: 'u4c18', term: 'usually', translation: 'обычно', example: 'I usually walk.' },
+          { id: 'u4c19', term: 'often', translation: 'часто', example: 'We often meet.' },
+          { id: 'u4c20', term: 'sometimes', translation: 'иногда', example: 'I sometimes cook.' },
+          { id: 'u4c21', term: 'rarely', translation: 'редко', example: 'I rarely drive.' },
+          { id: 'u4c22', term: 'never', translation: 'никогда', example: 'I never smoke.' },
+          { id: 'u4c23', term: 'once', translation: 'один раз', example: 'Once a week.' },
+          { id: 'u4c24', term: 'twice', translation: 'два раза', example: 'Twice a month.' },
+        ],
+      },
+      {
+        type: 'produce',
+        id: 'e9',
+        prompt: 'How often…?',
+        promptRu: 'Напишите 5 пар: вопрос How often…? и ваш ответ с наречием частотности.',
+        hints: ['How often do you…?', 'I always/usually/often…'],
+        minSentences: 5,
+      },
+    ],
+  },
+
+  'l1-u4-l4': {
+    lessonId: 'l1-u4-l4',
+    durationMin: 40,
+    exercises: [
+      {
+        type: 'explain',
+        id: 'e1',
+        title: 'City & transport',
+        points: [
+          'take a bus / train / metro / taxi',
+          'get on / get off (the bus)',
+          'ticket, station, stop, fare',
+          'Повторяем can + directions + how often',
+        ],
+        examples: [
+          'I take the metro to the centre.',
+          'Get off at the next stop.',
+          'Where is the ticket office?',
+        ],
+      },
+      {
+        type: 'drill',
+        id: 'e2',
+        prompt: 'I ___ the bus to work.',
+        options: ['take', 'go', 'make'],
+        answer: 'take',
+      },
+      {
+        type: 'drill',
+        id: 'e3',
+        prompt: '___ off at the museum.',
+        options: ['Get', 'Take', 'Go'],
+        answer: 'Get',
+      },
+      {
+        type: 'drill',
+        id: 'e4',
+        prompt: 'Where is the train ___?',
+        options: ['station', 'ticket', 'fare'],
+        answer: 'station',
+      },
+      {
+        type: 'builder',
+        id: 'e5',
+        prompt: 'Travel question',
+        tokens: ['Excuse', 'me', '.', 'Where', 'is', 'the', 'metro', '?'],
+        answer: ['Excuse', 'me', '.', 'Where', 'is', 'the', 'metro', '?'],
+      },
+      {
+        type: 'dialogue',
+        id: 'e6',
+        title: 'Tourist in the city',
+        lines: [
+          { id: 'd1', speaker: 'Tourist', text: 'Excuse me. Can you help me?' },
+          {
+            id: 'd2',
+            speaker: 'You',
+            choices: [
+              { text: 'Yes. Where do you want to go?', correct: true },
+              { text: 'Yes. Where you want go?', correct: false },
+            ],
+          },
+          { id: 'd3', speaker: 'Tourist', text: 'The museum, please.' },
+          {
+            id: 'd4',
+            speaker: 'You',
+            choices: [
+              {
+                text: 'Take the metro. Get off at Park Station. It is near the museum.',
+                correct: true,
+              },
+              { text: 'Taking metro. Getting off park.', correct: false },
+            ],
+          },
+        ],
+      },
+      {
+        type: 'cards',
+        id: 'e7',
+        cards: [
+          { id: 'u4c25', term: 'metro', translation: 'метро', example: 'Take the metro.' },
+          { id: 'u4c26', term: 'station', translation: 'станция / вокзал', example: 'At the station.' },
+          { id: 'u4c27', term: 'ticket', translation: 'билет', example: 'I need a ticket.' },
+          { id: 'u4c28', term: 'stop', translation: 'остановка', example: 'Next stop.' },
+          { id: 'u4c29', term: 'airport', translation: 'аэропорт', example: 'Go to the airport.' },
+          { id: 'u4c30', term: 'centre', translation: 'центр', example: 'In the city centre.' },
+          { id: 'u4c31', term: 'museum', translation: 'музей', example: 'The museum is opposite.' },
+          { id: 'u4c32', term: 'hotel', translation: 'отель', example: 'My hotel is near.' },
+        ],
+      },
+      {
+        type: 'produce',
+        id: 'e8',
+        prompt: 'Unit Challenge',
+        promptRu:
+          'Unit Challenge: 1) спросите дорогу к станции; 2) объясните, как вы добираетесь до центра и как часто ездите на метро. 7–8 предложений.',
+        hints: [
+          'Excuse me…',
+          'I usually take…',
+          'How often…',
+          'Get off…',
+        ],
+        minSentences: 7,
+      },
+    ],
+  },
+}
