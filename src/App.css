@@ -205,6 +205,24 @@
   color: var(--ink-soft);
 }
 
+.tip-card {
+  margin: 0.75rem 0 1rem;
+  padding: 1rem 1.05rem;
+  background: var(--mist);
+  border-radius: 14px;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--ink);
+}
+
+.footer-actions.inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  justify-content: flex-start;
+}
+
 .examples .label {
   margin: 0 0 0.35rem;
   font-size: 0.8rem;

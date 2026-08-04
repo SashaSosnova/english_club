@@ -8,7 +8,6 @@ import { ClozeView } from '../components/exercises/ClozeView'
 import { CardsView } from '../components/exercises/CardsView'
 import { DialogueView } from '../components/exercises/DialogueView'
 import { ListeningView } from '../components/exercises/ListeningView'
-import { ProduceView } from '../components/exercises/ProduceView'
 import type { CardItem } from '../types'
 
 type Props = {
@@ -40,7 +39,11 @@ export function LessonScreen({
   const [finished, setFinished] = useState(false)
   const scoreRef = useRef({ correct: 0, total: 0 })
 
-  const exercises = content?.exercises ?? []
+  // Free-write "produce" skipped: slow and hard for learners; focus on drills/cards/cloze.
+  const exercises = useMemo(
+    () => (content?.exercises ?? []).filter((e) => e.type !== 'produce'),
+    [content],
+  )
   const exercise = exercises[step]
   const progressPct = useMemo(
     () =>
@@ -101,7 +104,7 @@ export function LessonScreen({
         </button>
         <div className="grow">
           <p className="eyebrow">
-            Урок {meta.lesson.number} · ~{content.durationMin} мин
+            Урок {meta.lesson.number} · {exercises.length} шагов
           </p>
           <strong>{meta.lesson.titleRu}</strong>
           <div className="bar">
@@ -136,7 +139,13 @@ export function LessonScreen({
         </div>
       ) : (
         <>
-          {exercise.type === 'explain' && <ExplainView exercise={exercise} />}
+          {exercise.type === 'explain' && (
+            <ExplainView
+              key={exercise.id}
+              exercise={exercise}
+              onDone={finishSilent}
+            />
+          )}
           {exercise.type === 'drill' && (
             <DrillView
               key={exercise.id}
@@ -149,6 +158,9 @@ export function LessonScreen({
               key={exercise.id}
               exercise={exercise}
               onResult={record}
+              onSkip={() => {
+                record(false)
+              }}
             />
           )}
           {exercise.type === 'cloze' && (
@@ -182,15 +194,8 @@ export function LessonScreen({
               onDone={() => setAwaitNext(true)}
             />
           )}
-          {exercise.type === 'produce' && (
-            <ProduceView
-              key={exercise.id}
-              exercise={exercise}
-              onDone={finishSilent}
-            />
-          )}
 
-          {(exercise.type === 'explain' || awaitNext) && !finished && (
+          {awaitNext && !finished && (
             <div className="footer-actions">
               <button type="button" className="btn primary" onClick={goNext}>
                 {step >= exercises.length - 1 ? 'Завершить' : 'Дальше'}

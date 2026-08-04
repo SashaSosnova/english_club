@@ -4,6 +4,7 @@ import type { BuilderExercise } from '../../types'
 type Props = {
   exercise: BuilderExercise
   onResult: (correct: boolean) => void
+  onSkip?: () => void
 }
 
 function shuffle<T>(arr: T[]): T[] {
@@ -15,7 +16,7 @@ function shuffle<T>(arr: T[]): T[] {
   return a
 }
 
-export function BuilderView({ exercise, onResult }: Props) {
+export function BuilderView({ exercise, onResult, onSkip }: Props) {
   const poolInit = useMemo(
     () => shuffle(exercise.tokens.map((t, i) => ({ t, i }))),
     [exercise],
@@ -24,16 +25,21 @@ export function BuilderView({ exercise, onResult }: Props) {
   const [built, setBuilt] = useState<{ t: string; i: number }[]>([])
   const [checked, setChecked] = useState(false)
 
-  const correct =
-    checked &&
-    built.map((b) => b.t).join(' ') === exercise.answer.join(' ')
+  const target = exercise.answer.join(' ')
+  const correct = checked && built.map((b) => b.t).join(' ') === target
 
   return (
     <div className="panel">
       <p className="hint">{exercise.prompt}</p>
-      {exercise.promptRu && <h2 className="prompt">{exercise.promptRu}</h2>}
+      {exercise.promptRu ? (
+        <h2 className="prompt">{exercise.promptRu}</h2>
+      ) : (
+        <p className="meta">Соберите предложение из слов ниже</p>
+      )}
       <div className="builder-line">
-        {built.length === 0 && <span className="placeholder">Соберите здесь</span>}
+        {built.length === 0 && (
+          <span className="placeholder">Соберите здесь</span>
+        )}
         {built.map((item) => (
           <button
             key={`b-${item.i}`}
@@ -66,24 +72,37 @@ export function BuilderView({ exercise, onResult }: Props) {
         ))}
       </div>
       {!checked ? (
-        <button
-          type="button"
-          className="btn primary"
-          disabled={built.length === 0}
-          onClick={() => {
-            const ok =
-              built.map((b) => b.t).join(' ') === exercise.answer.join(' ')
-            setChecked(true)
-            onResult(ok)
-          }}
-        >
-          Проверить
-        </button>
+        <div className="footer-actions inline">
+          <button
+            type="button"
+            className="btn primary"
+            disabled={built.length === 0}
+            onClick={() => {
+              const ok = built.map((b) => b.t).join(' ') === target
+              setChecked(true)
+              onResult(ok)
+            }}
+          >
+            Проверить
+          </button>
+          {onSkip && (
+            <button
+              type="button"
+              className="btn ghost"
+              onClick={() => {
+                setChecked(true)
+                setBuilt(exercise.answer.map((t, i) => ({ t, i })))
+                setPool([])
+                onSkip()
+              }}
+            >
+              Показать ответ
+            </button>
+          )}
+        </div>
       ) : (
         <p className={`feedback ${correct ? 'ok' : 'bad'}`}>
-          {correct
-            ? 'Верно'
-            : `Правильно: ${exercise.answer.join(' ')}`}
+          {correct ? 'Верно' : `Правильно: ${target}`}
         </p>
       )}
     </div>

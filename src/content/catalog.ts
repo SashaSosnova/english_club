@@ -106,7 +106,7 @@ export const levels: LevelMeta[] = [
                 'twelve',
                 'fifteen',
                 'twenty',
-                'How much is it?',
+                'Monday',
                 'weekend',
               ],
             },
